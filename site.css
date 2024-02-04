@@ -1,0 +1,75 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto auto auto auto;
+    place-items: center;
+    padding: 30px;
+}
+
+    .grid div {
+        font-size: 16px;
+        padding: 40px 0px;
+    }
+
+    .grid p {
+        font-size: 16px;
+        padding: 10px 40px;
+    }
+
+
+.relative {
+    position: relative;
+    left: 30%;
+    top: -80px;
+}
+
+
+
+.imgo {
+    height: 12rem;
+    width: 12rem;
+}
+
+.stimg {
+    height: 12rem;
+    width: 24rem;
+    border-radius: 10px;
+}
+
+.abtpage {
+    color: aquamarine;
+    font-size: 20px;
+}
+
+.scrollers {
+    width: 350px;
+    height: 490px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+
+
+input:required:invalid {
+    border: 1px solid red;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-color: #141414;
+}

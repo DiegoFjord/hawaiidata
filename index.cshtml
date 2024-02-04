@@ -1,0 +1,173 @@
+@page
+@model IndexModel
+@using Microsoft.AspNetCore.Components.Web
+@using redone.Services;
+@inject mlservice mservice;
+@inject trials sended;
+
+@{
+    // was using for ingection
+    //var message = mservice.Show;
+    //using from model
+    var messagetoo = Model.Message;
+    
+}
+
+
+@{
+    string[] inputs = { "Temp", "Dew", "Humidity", "Precip", "Precipprob", "Precipcover", "Windgust", "Windspeed", "Cloudcover", "Visibility", "Solarradiation", "Uvindex", "sunrise", "sunset" };
+    float outside = 0;
+
+}
+<div class="text-center">
+    <div class="d-flex flex-row">
+        <h1 class="display-2 text-white flex-fill">AI tourist prediction(1.12)</h1>
+        <h6 class="text-uppercase text-white bg-warning card " style="height: 2rem;">&nbsp;location: Hawaii&nbsp;</h6>
+    </div>
+    <div class="container">
+        <div class="d-flex">
+            <div class="p-2 ">
+
+                <div class="bg-dark scrollers card text-light " style="width: 24rem;">
+                    <form method="post" action="" validateForm()>
+                        @foreach (var dog in inputs)
+                        {
+                            <p calss="">@dog</p>
+                            <input type="text" name="@dog" value="" required />
+                            <br />
+                        }
+                        <button type="submit" value="Submit" class="btn btn-outline-light">Submit</button>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="p-2 " style="width: 100%;">
+                @if (Model.weathernow.Any())
+                {
+                    var firstState = Model.weathernow.First();
+                    <div class="card">
+                        <div class="d-flex">
+                            <div class="p-2 flex-fill">
+                                <p class="text-start">Temperature @firstState?.temp</p>
+                                <p class="text-start">Dew @firstState?.dew</p>
+                                <p class="text-start">Humidity @firstState?.humidity</p>
+                            </div>
+                            <div class="p-2 flex-fill">
+                                <p class="text-center">Precipitation @firstState?.precip</p>
+                                <p class="text-center">Wind speed @firstState?.wspd</p>
+                                <p class="text-center">Cloudcover @firstState?.cloudcover</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="card text-start">
+                    @{
+                        if (Model.IsPost)
+                        {
+                            string temp = Request.Form["Temp"];
+                            float pTemp = float.Parse(temp);
+
+                            string dew = Request.Form["Dew"];
+                            float pDew = float.Parse(dew);
+
+                            string humidity = Request.Form["Humidity"];
+                            float pHumidity = float.Parse(humidity);
+
+                            string precip = Request.Form["Precip"];
+                            float pPrecip = float.Parse(precip);
+
+                            string precipprob = Request.Form["Precipprob"];
+                            float pPrecipprob = float.Parse(precipprob);
+
+                            string precipcover = Request.Form["Precipcover"];
+                            float pPrecipcover = float.Parse(precipcover);
+
+                            string windgust = Request.Form["Windgust"];
+                            float pWindgust = float.Parse(windgust);
+
+                            string windspeed = Request.Form["Windspeed"];
+                            float pWindspeed = float.Parse(windspeed);
+
+                            string cloudcover = Request.Form["Cloudcover"];
+                            float pCloudcover = float.Parse(cloudcover);
+
+                            string visibility = Request.Form["Visibility"];
+                            float pVisibility = float.Parse(visibility);
+
+                            string solarradiation = Request.Form["Solarradiation"];
+                            float pSolarradiation = float.Parse(solarradiation);
+
+                            string uvindex = Request.Form["Uvindex"];
+                            float pUvindex = float.Parse(uvindex);
+
+                            string sunrise = Request.Form["Uvindex"];
+                            string sunset = Request.Form["Uvindex"];
+
+                            var dog = mservice.createprediction(pTemp, pDew, pHumidity, pPrecip, pPrecipprob, pPrecipcover, pWindgust, pWindspeed, pCloudcover, pVisibility, pSolarradiation, pUvindex, sunrise, sunset);
+                            outside = float.Parse(dog);
+                            var averaged = Math.Round(((float.Parse(dog) / 30692) * 100), 2);
+
+                            <div class="p-2 bd-highlight">
+                                <p>Estimated tourists:         @dog</p>
+                                <p>this is compared to 30,692 daily visitors which is @averaged% of the average</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <p class="p-2 bd-highlight">Fill out form to see see daily tourist prediction</p>
+                        }
+                    }
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <p>from the following data</p>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="text-start text-info">we suggest you</h2>
+                        <div class="d-flex">
+                            @{
+                                var secState = Model.weathernow.First();
+
+                                if (secState.precip > 1)
+                                {
+                                    <div class="card text-center p-2 flex-fill text-black" style="height:10rem "><p>use an umberella</p><i class="bi bi-umberella" style="font-size: 48px;"></i></div>
+                                }
+                                else
+                                {
+                                    <div class="card text-center p-2 flex-fill text-black" style="height:10rem "><p>use sun lotion</p><i class="bi bi-sun" style="font-size: 48px;"></i></div>
+                                }
+                                if (secState.wgust > 22)
+                                {
+                                    <div class="card text-center p-2 flex-fill text-black" style="height:10rem "><p>fly a kite</p><i class="bi bi-diamond" style="font-size: 48px;"></i></div>
+                                }
+                                else
+                                {
+                                    <div class="card text-center p-2 flex-fill text-black" style="height:10rem "><p>go swimming</p><i class="bi bi-life-preserver" style="font-size: 48px;"></i></div>
+                                }
+                                if (outside > 29000)
+                                {
+                                    <div class="card text-center p-2 flex-fill text-black" style="height:10rem "><p>take a bus</p><i class="bi bi-bus-front" style="font-size: 48px;"></i></div>
+                                }
+                                else
+                                {
+                                    <div class="card text-center p-2 flex-fill text-black" style="height:10rem "><p>take a hike</p><i class="bi bi-signpost-split" style="font-size: 48px;"></i></div>
+
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+
+@* @{<p>testing output @messagetoo</p>}
+ *@
