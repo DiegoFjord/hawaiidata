@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using redone.Models;
-using redone.Services;
+using myapp.Models;
+using myapp.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace redone.Controllers
+namespace myapp.Controllers
 {
     [Route("[controller]")]
     [ApiController]
