@@ -1,16 +1,12 @@
 @page
 @model IndexModel
 @using Microsoft.AspNetCore.Components.Web
-@using redone.Services;
+@using myapp.Services;
 @inject mlservice mservice;
 @inject trials sended;
 
 @{
-    // was using for ingection
-    //var message = mservice.Show;
-    //using from model
     var messagetoo = Model.Message;
-    
 }
 
 
@@ -161,13 +157,5 @@
             </div>
         </div>
     </div>
-
-
-
-
 </div>
 
-
-
-@* @{<p>testing output @messagetoo</p>}
- *@
