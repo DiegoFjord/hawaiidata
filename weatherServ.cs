@@ -1,7 +1,7 @@
 using System.Text.Json;
-using redone.Models;
+using myapp.Models;
 
-namespace redone.Services
+namespace myapp.Services
 {
     public class weatherServ
     {
