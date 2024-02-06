@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using redone.Models;
-using redone.Services;
+using myapp.Models;
+using myapp.Services;
 
-namespace redone.Pages
+namespace myapp.Pages
 {
     public class IndexModel : PageModel
     {
