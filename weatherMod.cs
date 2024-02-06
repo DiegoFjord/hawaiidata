@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using System.Text.Json;
 
-namespace redone.Models
+namespace myapp.Models
 {
     public class weatherMod
     {
